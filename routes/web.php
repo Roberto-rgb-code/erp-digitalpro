@@ -8,6 +8,7 @@ use App\Http\Controllers\PolizaServicioController;
 use App\Http\Controllers\ServiciosEmpresarialesController;
 use App\Http\Controllers\TicketSoporteController;
 use App\Http\Controllers\InformeServicioController;
+use App\Http\Controllers\ProyectoInstalacionController;
 
 
 
@@ -33,3 +34,7 @@ Route::resource('usuario_clientes', UsuarioClienteController::class)->except(['s
 Route::resource('configuracion_clientes', ConfiguracionClienteController::class)->except(['show']);
 Route::resource('informe_servicios', InformeServicioController::class)->except(['show']);
 Route::get('informe_servicios/{id}/pdf', [InformeServicioController::class, 'pdf'])->name('informe_servicios.pdf');
+Route::resource('proyectos_software', App\Http\Controllers\ProyectoSoftwareController::class);
+Route::resource('proyectos-instalacion', App\Http\Controllers\ProyectoInstalacionController::class);
+Route::get('cableado', [ProyectoInstalacionController::class, 'index'])->name('cableado.index');
+Route::resource('cableado', ProyectoInstalacionController::class);

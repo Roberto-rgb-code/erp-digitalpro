@@ -84,15 +84,15 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link">
-                    <i class="bi bi-code-slash me-2"></i> Desarrollo de Software
+                <a href="{{ route('proyectos_software.index') }}" class="nav-link {{ request()->is('proyectos_software*') ? 'active' : '' }}">
+                    <i class="bi bi-laptop"></i> Desarrollo de Software
                 </a>
-            </li>
+            </li>            
             <li>
-                <a href="#" class="nav-link">
+                <a href="{{ route('cableado.index') }}" class="nav-link {{ request()->is('cableado*') ? 'active' : '' }}">
                     <i class="bi bi-diagram-3 me-2"></i> Cableado Estructurado
                 </a>
-            </li>
+            </li>            
             <li>
                 <a href="#" class="nav-link">
                     <i class="bi bi-currency-dollar me-2"></i> Cobranza
@@ -145,6 +145,7 @@
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 @stack('scripts')
 </body>

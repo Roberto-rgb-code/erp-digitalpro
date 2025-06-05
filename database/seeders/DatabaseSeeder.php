@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
         $this->call(TipoClienteSeeder::class); // This is the line you needed to add!
         $this->call(EstadoVentaSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(EmpleadoSeeder::class);
+
 
 
     }
