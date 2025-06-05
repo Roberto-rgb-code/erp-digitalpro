@@ -9,6 +9,7 @@ use App\Http\Controllers\ServiciosEmpresarialesController;
 use App\Http\Controllers\TicketSoporteController;
 use App\Http\Controllers\InformeServicioController;
 use App\Http\Controllers\ProyectoInstalacionController;
+use App\Http\Controllers\AdministracionController;
 
 
 
@@ -38,3 +39,12 @@ Route::resource('proyectos_software', App\Http\Controllers\ProyectoSoftwareContr
 Route::resource('proyectos-instalacion', App\Http\Controllers\ProyectoInstalacionController::class);
 Route::get('cableado', [ProyectoInstalacionController::class, 'index'])->name('cableado.index');
 Route::resource('cableado', ProyectoInstalacionController::class);
+Route::middleware(['auth'])->group(function() {
+    Route::get('/administracion', [AdministracionController::class, 'index'])->name('administracion.index');
+    // Si deseas, puedes definir submódulos:
+    // Route::resource('gastos', GastoGeneralController::class);
+    // Route::resource('ingresos', IngresoAdicionalController::class);
+    // Route::resource('cortecaja', CorteCajaController::class);
+    // Route::resource('indicadores', IndicadorController::class);
+    // Y así con los demás submódulos...
+});

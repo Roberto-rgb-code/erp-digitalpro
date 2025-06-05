@@ -98,11 +98,11 @@
                     <i class="bi bi-currency-dollar me-2"></i> Cobranza
                 </a>
             </li>
-            <li>
-                <a href="#" class="nav-link">
-                    <i class="bi bi-shield-check me-2"></i> Administración
+            <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('administracion.index') ? 'active' : '' }}" href="{{ route('administracion.index') }}">
+                    <i class="bi bi-gear"></i> Administración
                 </a>
-            </li>
+            </li>            
             <li>
                 <a href="#" class="nav-link">
                     <i class="bi bi-truck me-2"></i> Control de Vehículos
