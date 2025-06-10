@@ -10,6 +10,7 @@ use App\Http\Controllers\TicketSoporteController;
 use App\Http\Controllers\InformeServicioController;
 use App\Http\Controllers\ProyectoInstalacionController;
 use App\Http\Controllers\AdministracionController;
+use App\Http\Controllers\VehiculoController;
 
 
 
@@ -48,3 +49,14 @@ Route::middleware(['auth'])->group(function() {
     // Route::resource('indicadores', IndicadorController::class);
     // Y así con los demás submódulos...
 });
+Route::resource('gastos', GastoGeneralController::class);
+Route::resource('vehiculos', VehiculoController::class);
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('vehiculos', VehiculoController::class);
+});
+// routes/web.php
+Route::resource('empleados', EmpleadoController::class);
+Route::resource('empleados', App\Http\Controllers\EmpleadoController::class);
+// Rutas para Cobranza (Cuentas por Cobrar)
+Route::resource('cobranza', App\Http\Controllers\CobranzaController::class);

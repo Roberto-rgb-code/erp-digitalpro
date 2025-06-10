@@ -94,25 +94,25 @@
                 </a>
             </li>            
             <li>
-                <a href="#" class="nav-link">
-                    <i class="bi bi-currency-dollar me-2"></i> Cobranza
+                <a href="{{ route('cobranza.index') }}" class="nav-link {{ request()->is('cobranza*') ? 'active' : '' }}">
+                    <i class="bi bi-cash-stack"></i> cobranza
                 </a>
-            </li>
+            </li>            
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('administracion.index') ? 'active' : '' }}" href="{{ route('administracion.index') }}">
                     <i class="bi bi-gear"></i> Administración
                 </a>
             </li>            
             <li>
-                <a href="#" class="nav-link">
-                    <i class="bi bi-truck me-2"></i> Control de Vehículos
+                <a href="{{ route('vehiculos.index') }}" class="nav-link {{ request()->is('vehiculos*') ? 'active' : '' }}">
+                    <i class="bi bi-truck"></i> Control de Vehículos
                 </a>
-            </li>
+            </li>            
             <li>
-                <a href="#" class="nav-link">
-                    <i class="bi bi-people-fill me-2"></i> Recursos Humanos
+                <a href="{{ route('empleados.index') }}" class="nav-link {{ request()->is('empleados*') ? 'active' : '' }}">
+                    <i class="bi bi-person-badge"></i> Recursos Humanos
                 </a>
-            </li>
+            </li>            
         </ul>
         <hr>
         <div class="user-info d-flex align-items-center gap-2">
