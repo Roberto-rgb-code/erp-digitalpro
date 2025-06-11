@@ -4,10 +4,20 @@
 <div class="container">
     <h2>Nuevo Cliente</h2>
 
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                    <li><i class="bi bi-exclamation-triangle-fill"></i> {{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <form method="POST" action="{{ route('clientes.store') }}" enctype="multipart/form-data" id="formCliente">
         @csrf
 
-        {{-- Datos básicos --}}
+        {{-- Datos generales --}}
         <div class="card mb-4">
             <div class="card-header">Datos Generales</div>
             <div class="card-body row g-3">
@@ -45,7 +55,7 @@
             </div>
         </div>
 
-        {{-- Datos Fiscales --}}
+        {{-- Datos fiscales --}}
         <div class="card mb-4 d-none" id="cardFiscal">
             <div class="card-header">Datos Fiscales</div>
             <div class="card-body row g-3">
@@ -59,11 +69,38 @@
                 </div>
                 <div class="col-md-4">
                     <label>Uso CFDI *</label>
-                    <input type="text" name="uso_cfdi" value="{{ old('uso_cfdi') }}" class="form-control">
+                    <select name="uso_cfdi_id" class="form-select">
+                        <option value="">Selecciona...</option>
+                        @foreach($usosCfdi as $uso)
+                            <option value="{{ $uso->id }}" {{ old('uso_cfdi_id') == $uso->id ? 'selected' : '' }}>
+                                {{ $uso->clave }} - {{ $uso->descripcion }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
-                <div class="col-md-8">
-                    <label>Dirección Fiscal Completa *</label>
-                    <textarea name="direccion_fiscal" class="form-control">{{ old('direccion_fiscal') }}</textarea>
+                <div class="col-md-4">
+                    <label>Calle *</label>
+                    <input type="text" name="calle" value="{{ old('calle') }}" class="form-control">
+                </div>
+                <div class="col-md-2">
+                    <label>Número *</label>
+                    <input type="text" name="numero" value="{{ old('numero') }}" class="form-control">
+                </div>
+                <div class="col-md-4">
+                    <label>Colonia *</label>
+                    <input type="text" name="colonia" value="{{ old('colonia') }}" class="form-control">
+                </div>
+                <div class="col-md-2">
+                    <label>CP *</label>
+                    <input type="text" name="cp" value="{{ old('cp') }}" class="form-control">
+                </div>
+                <div class="col-md-4">
+                    <label>Municipio *</label>
+                    <input type="text" name="municipio" value="{{ old('municipio') }}" class="form-control">
+                </div>
+                <div class="col-md-4">
+                    <label>Estado *</label>
+                    <input type="text" name="estado" value="{{ old('estado') }}" class="form-control">
                 </div>
             </div>
         </div>
@@ -83,30 +120,6 @@
             </div>
         </div>
 
-        {{-- Documentos --}}
-        <div class="card mb-4">
-            <div class="card-header">Documentación</div>
-            <div class="card-body row g-3">
-                <div class="col-md-4">
-                    <label>Contrato (PDF/JPG)</label>
-                    <input type="file" name="documentos[contrato]" class="form-control">
-                </div>
-                <div class="col-md-4">
-                    <label>Solicitud</label>
-                    <input type="file" name="documentos[solicitud]" class="form-control">
-                </div>
-                <div class="col-md-4">
-                    <label>Identificación</label>
-                    <input type="file" name="documentos[identificacion]" class="form-control">
-                </div>
-                <div class="col-md-4">
-                    <label>Cheques</label>
-                    <input type="file" name="documentos[cheques]" class="form-control">
-                </div>
-            </div>
-        </div>
-
-        {{-- Botón --}}
         <div class="mb-4 text-end">
             <button class="btn btn-primary" type="submit"><i class="bi bi-save"></i> Guardar cliente</button>
             <a href="{{ route('clientes.index') }}" class="btn btn-outline-secondary">Cancelar</a>

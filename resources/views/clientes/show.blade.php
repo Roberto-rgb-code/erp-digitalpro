@@ -3,6 +3,11 @@
 @section('content')
 <div class="container">
     <h2 class="mb-4">Ficha de Cliente</h2>
+
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
     <div class="mb-3">
         <a href="{{ route('clientes.index') }}" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Volver</a>
         <a href="{{ route('clientes.edit', $cliente->id) }}" class="btn btn-warning"><i class="bi bi-pencil"></i> Editar</a>
@@ -11,14 +16,14 @@
     <div class="card mb-3">
         <div class="card-header bg-primary text-white">Datos Generales</div>
         <div class="card-body row g-3">
-            <div class="col-md-6"><strong>Folio:</strong> <span class="badge bg-dark">{{ $cliente->folio }}</span></div>
-            <div class="col-md-6"><strong>Nombre:</strong> {{ $cliente->nombre }}</div>
-            <div class="col-md-6"><strong>Tipo:</strong> {{ $cliente->tipo->nombre ?? '' }}</div>
+            <div class="col-md-4"><strong>Folio:</strong> <span class="badge bg-dark">{{ $cliente->folio }}</span></div>
+            <div class="col-md-8"><strong>Nombre:</strong> {{ $cliente->nombre }}</div>
+            <div class="col-md-4"><strong>Tipo:</strong> {{ $cliente->tipo->nombre ?? '' }}</div>
             <div class="col-md-4"><strong>Teléfono:</strong> {{ $cliente->telefono }}</div>
             <div class="col-md-4"><strong>Email:</strong> {{ $cliente->email }}</div>
             <div class="col-md-4"><strong>Fecha de alta:</strong> {{ $cliente->fecha_alta ? \Carbon\Carbon::parse($cliente->fecha_alta)->format('d/m/Y') : '' }}</div>
-            <div class="col-md-3"><strong>Factura:</strong>
-                @if($cliente->requiere_factura)
+            <div class="col-md-4"><strong>Factura:</strong>
+                @if($cliente->configuracion && $cliente->configuracion->requiere_factura)
                     <span class="badge bg-success">Sí</span>
                 @else
                     <span class="badge bg-secondary">No</span>
@@ -33,8 +38,13 @@
         <div class="card-body row g-3">
             <div class="col-md-4"><strong>RFC:</strong> {{ $cliente->fiscal->rfc }}</div>
             <div class="col-md-6"><strong>Razón Social:</strong> {{ $cliente->fiscal->razon_social }}</div>
-            <div class="col-md-4"><strong>Uso CFDI:</strong> {{ $cliente->fiscal->uso_cfdi }}</div>
-            <div class="col-md-8"><strong>Dirección Fiscal:</strong> {{ $cliente->fiscal->direccion_fiscal }}</div>
+            <div class="col-md-4"><strong>Uso CFDI:</strong> {{ $cliente->fiscal->usoCfdi->clave ?? '' }} - {{ $cliente->fiscal->usoCfdi->descripcion ?? '' }}</div>
+            <div class="col-md-4"><strong>Calle:</strong> {{ $cliente->fiscal->calle }}</div>
+            <div class="col-md-2"><strong>Número:</strong> {{ $cliente->fiscal->numero }}</div>
+            <div class="col-md-4"><strong>Colonia:</strong> {{ $cliente->fiscal->colonia }}</div>
+            <div class="col-md-2"><strong>CP:</strong> {{ $cliente->fiscal->cp }}</div>
+            <div class="col-md-4"><strong>Municipio:</strong> {{ $cliente->fiscal->municipio }}</div>
+            <div class="col-md-4"><strong>Estado:</strong> {{ $cliente->fiscal->estado }}</div>
         </div>
     </div>
     @endif
@@ -49,7 +59,7 @@
     </div>
     @endif
 
-    @if($cliente->documentos->count())
+    @if($cliente->documentos && $cliente->documentos->count())
     <div class="card mb-3">
         <div class="card-header bg-light">Documentos</div>
         <div class="card-body row g-3">
